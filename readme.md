@@ -1,6 +1,5 @@
 # Data Pirates
 
-## New line
 
 # Homemade and Antique Shopping Website
 
