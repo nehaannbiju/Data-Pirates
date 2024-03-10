@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>Kid's Collection</title>
+    <style>
+        
+
+        body {
+          
+            margin: 0;
+            padding: 0;
+            background-color: black;
+        }
+
+        header {
+            background-color: #897a7a;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .dress {
+            background-color: #fff;
+            border: 1px solid black;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 15px;
+            width: 300px;
+            text-align: justify;
+            transition: transform 0.2s ease;
+            position: relative;
+        }
+
+        .dress:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .dress img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .dress h2 {
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .price {
+            margin-top: 5px;
+            font-weight: bold;
+            color: black;
+        }
+
+        .buy-btn {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #a65b5b;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .sizes {
+            margin-top: 10px;
+        }
+
+        .sizes label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Kids's Collection</h1>
+    </header>
+    <section>
+        <!-- Dress Template -->
+        <template id="dress-template">
+            <div class="dress">
+                <img src="" alt="">
+                <h2></h2>
+                <p class="price"></p>
+                <div class="sizes">
+                    <label for="size">Size:</label>
+                    <select name="size" id="size">
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                </div>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+        </template>
+
+        <!-- Rendered Dresses -->
+        <script>
+            // Dress data
+            const dresses = [
+                { image: 'kid1.jpg', name: 'Shirt Dress', price: 'Rs.500' },
+                { image: 'kid2.jpg', name: 'Frock', price: 'Rs.770' },
+                { image: 'kid3.jpg', name: 'Off shoulder dress', price: 'Rs.830' },
+                { image: 'kid4.jpg', name: 'Dungaree ', price: 'Rs.600' },
+                { image: 'kid5.jpg', name: 'Tshirt and shorts', price: 'Rs.360' },
+                { image: 'kid6.jpg', name: 'Kids dress set', price: 'Rs.507' },
+                { image: 'kid7.jpg', name: 'Frock', price: 'Rs.900' },
+                { image: 'kid8.jpg', name: 'Casual off shoulder dress', price: 'Rs.600' },
+                { image: 'kid9.jpg', name: 'Code set for kids', price: 'Rs.500' },
+                { image: 'kid10.jpg', name: 'Floral set', price: 'Rs.500' }
+                // Add more dress data as needed
+            ];
+
+            // Render dresses
+            const section = document.querySelector('section');
+            const template = document.getElementById('dress-template');
+
+            dresses.forEach(dress => {
+                const clone = document.importNode(template.content, true);
+                const dressElement = clone.querySelector('.dress');
+                const buyBtn = clone.querySelector('.buy-btn');
+                const sizeSelect = clone.querySelector('#size');
+
+                dressElement.querySelector('img').src = dress.image;
+                dressElement.querySelector('img').alt = dress.name;
+                dressElement.querySelector('h2').textContent = dress.name;
+                dressElement.querySelector('.price').textContent = dress.price;
+
+                buyBtn.addEventListener('click', () => {
+                    const selectedSize = sizeSelect.value;
+                    const dressInfo = `${dress.name} - Size: ${selectedSize}`;
+                    alert(`Added to cart: ${dressInfo}`);
+                });
+
+                section.appendChild(clone);
+            });
+        </script>
+    </section>
+</body>
+</html>
