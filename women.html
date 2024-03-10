@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>Women's Collection</title>
+    <style>
+        
+
+        body {
+            
+            margin: 0;
+            padding: 0;
+            background-color: black;
+        }
+
+        header {
+            background-color: #897a7a;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .dress {
+            background-color: #fff;
+            border: 1px solid black;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 15px;
+            width: 300px;
+            text-align: justify;
+            transition: transform 0.2s ease;
+            position: relative;
+        }
+
+        .dress:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .dress img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .dress h2 {
+            margin-top: 10px;
+            color: #272424;
+        }
+
+        .price {
+            margin-top: 5px;
+            font-weight: bold;
+            color: black;
+        }
+
+        .buy-btn {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #a65b5b;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .sizes {
+            margin-top: 10px;
+        }
+
+        .sizes label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Women's Collections</h1>
+    </header>
+    <section>
+        <!-- Dress Template -->
+        <template id="dress-template">
+            <div class="dress">
+                <img src="" alt="">
+                <h2></h2>
+                <p class="price"></p>
+                <div class="sizes">
+                    <label for="size">Size:</label>
+                    <select name="size" id="size">
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                </div>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+        </template>
+
+        <!-- Rendered Dresses -->
+        <script>
+            // Dress data
+            const dresses = [
+            { image: 'img 1.jpg', name: 'Korean Dress', price: 'Rs.500' },
+                { image: 'img 2.jpg', name: 'Sharara', price: 'Rs.770' },
+                { image: 'img 11.jpg', name: 'Black and white top', price: 'Rs.830' },
+                { image: 'img 4.jpg', name: 'White printed dress', price: 'Rs.600' },
+                { image: 'img 5.jpg', name: 'Pleated dress', price: 'Rs.360' },
+                { image: 'img 12.jpg', name: 'White crop top', price: 'Rs.507' },
+                { image: 'img 13.jpg', name: 'Bell sleeve top', price: 'Rs.900' },
+                { image: 'img 8.jpg', name: 'Cotton Tunic', price: 'Rs.600' },
+                { image: 'img 9.jpg', name: 'Sweatshirt', price: 'Rs.500' },
+                { image: 'img 10.jpg', name: 'Lace top', price: 'Rs.500' }
+
+            ];
+
+            // Render dresses
+            const section = document.querySelector('section');
+            const template = document.getElementById('dress-template');
+
+            dresses.forEach(dress => {
+                const clone = document.importNode(template.content, true);
+                const dressElement = clone.querySelector('.dress');
+                const buyBtn = clone.querySelector('.buy-btn');
+                const sizeSelect = clone.querySelector('#size');
+
+                dressElement.querySelector('img').src = dress.image;
+                dressElement.querySelector('img').alt = dress.name;
+                dressElement.querySelector('h2').textContent = dress.name;
+                dressElement.querySelector('.price').textContent = dress.price;
+
+                buyBtn.addEventListener('click', () => {
+                    const selectedSize = sizeSelect.value;
+                    const dressInfo = `${dress.name} - Size: ${selectedSize}`;
+                    alert(`Added to cart: ${dressInfo}`);
+                });
+
+                section.appendChild(clone);
+            });
+        </script>
+    </section>
+</body>
+</html>
